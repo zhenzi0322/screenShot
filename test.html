@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>前端屏幕截图</title>
+</head>
+
+<body>
+<div id="app">
+    <img src="dist/sampleImage2.png">
+    <br/>
+    <button onclick="changeScreenShot()">点击截图</button>
+    <p>图片展示</p>
+    <img src="" alt="" id="show">
+</div>
+</body>
+<script src="dist/screenShotPlugin.umd.js"></script>
+<script type="text/javascript">
+    const changeScreenShot = async () => {
+        // 截图确认按钮回调函数
+        const callback = (res) => {
+            const img = document.querySelector("#show");
+            img.src = res.base64;
+        }
+        // 截图取消时的回调函数
+        const closeFn = () => {
+            console.log("截图窗口关闭");
+        }
+        new screenShotPlugin({enableWebRtc: true, completeCallback: callback, closeCallback: closeFn});
+    }
+</script>
+
+
+</html>
